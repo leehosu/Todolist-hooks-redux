@@ -1,22 +1,30 @@
 import React from 'react';
 import TodoInfo from '../TodoInfo';
+import './TodoList.css';
 
-const TodoList = ({todos, input, onRemove, onToggle, onChange, onSubmit}) => {
-  return(
-    <div>
+const TodoList = ({
+  todos,
+  input,
+  onRemove,
+  onToggle,
+  onChange,
+  onSubmit,
+  onUpdate
+}) => {
+  return (
+    <div className="todo">
       <form onSubmit={onSubmit}>
-        <input value={input} onChange={onChange} />
-        <button type="submit"> 추가 </button>
+        <input value={input} onChange={onChange} className="todo-input" />
+        <button type="submit" className="todo-button">
+          {" "}
+          추가{" "}
+        </button>
       </form>
-        <ul>
-          <TodoInfo 
-            todos={todos}
-            onRemove={onRemove}
-            onToggle={onToggle}
-          />
-        </ul>
+      <ul className="todo-list">
+        <TodoInfo todos={todos} onRemove={onRemove} onToggle={onToggle} onUpdate={onUpdate} onChange={onChange}/>
+      </ul>
     </div>
-  )
+  );
 };
 
 export default TodoList;
