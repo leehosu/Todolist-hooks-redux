@@ -1,18 +1,17 @@
 import React from 'react';
 import './TodoItem.css';
 
-const TodoItem = ({ todo, onRemove, onToggle, onUpdate }) => {
+const TodoItem = ({ todo, onRemove, onUpdate, onToggle, onToggleUpdate }) => {
   const { id, text, done, editing } = todo;
-
   if (editing) {
     return (
       <li className="todo-item">
-        <input value={text} onChange={todo}/>
+        <input value={text} onChange={onUpdate} className="todo-item-text"/>
+        <button className="todo-update" onClick={() => onToggleUpdate(id)}>
+          완료
+        </button>
         <button className="todo-remove" onClick={() => onRemove(id)}>
           삭제
-        </button>
-        <button className="todo-update" onClick={() => onUpdate(id)}>
-          완료
         </button>
       </li>
     );
@@ -27,11 +26,11 @@ const TodoItem = ({ todo, onRemove, onToggle, onUpdate }) => {
       >
         {text}
       </span>
+      <button className="todo-update" onClick={() => onToggleUpdate(id)}>
+        수정
+      </button>
       <button className="todo-remove" onClick={() => onRemove(id)}>
         삭제
-      </button>
-      <button className="todo-update" onClick={() => onUpdate(id)}>
-        수정
       </button>
     </li>
   );

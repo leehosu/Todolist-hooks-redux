@@ -9,6 +9,7 @@ const TodoList = ({
   onToggle,
   onChange,
   onSubmit,
+  onToggleUpdate,
   onUpdate
 }) => {
   return (
@@ -16,12 +17,17 @@ const TodoList = ({
       <form onSubmit={onSubmit}>
         <input value={input} onChange={onChange} className="todo-input" />
         <button type="submit" className="todo-button">
-          {" "}
-          추가{" "}
+          추가
         </button>
       </form>
       <ul className="todo-list">
-        <TodoInfo todos={todos} onRemove={onRemove} onToggle={onToggle} onUpdate={onUpdate} onChange={onChange}/>
+        <TodoInfo 
+        todos={todos} 
+        onRemove={onRemove} 
+        onToggle={onToggle}
+        onToggleUpdate={onToggleUpdate}
+        onUpdate={onUpdate} 
+        onChange={onChange}/>
       </ul>
     </div>
   );

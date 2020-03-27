@@ -3,10 +3,11 @@ export const INSERT = "todo/INSERT";
 export const TOGGLE_CHECK = "todo/TOGGLE_CHECK";
 export const REMOVE = "todo/REMOVE";
 export const TOGGLE_UPDATE = "todo/TOGGLE_UPDATE";
+export const UPDATE = "todo/UPDATE";
 
 const initState = {
   input : "",
-  todos :[]
+  todos : []
 };
 
 const todos = (state = initState, action) => {
@@ -20,7 +21,10 @@ const todos = (state = initState, action) => {
     case INSERT:
       return {
         ...state,
-        todos : state.todos.concat({ ...action.payload, done : false })
+        todos : state.todos.concat({ 
+          ...action.payload, 
+          done : false 
+        })
       };
 
     case TOGGLE_CHECK:
@@ -51,6 +55,18 @@ const todos = (state = initState, action) => {
               }
               : todo
               )
+          };
+      
+        case UPDATE:
+          return {
+            ...state,
+            todos : state.todos.map(todo => 
+              todo.id === action.payload.id ? {
+                ...todo,
+                text : action.payload.text
+              }
+              : todo          
+            )
           };
 
       default:
