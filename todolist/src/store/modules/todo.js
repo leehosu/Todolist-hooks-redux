@@ -3,7 +3,6 @@ export const INSERT = "todo/INSERT";
 export const TOGGLE_CHECK = "todo/TOGGLE_CHECK";
 export const REMOVE = "todo/REMOVE";
 export const TOGGLE_UPDATE = "todo/TOGGLE_UPDATE";
-export const UPDATE = "todo/UPDATE";
 
 const initState = {
   input : "",
@@ -49,26 +48,15 @@ const todos = (state = initState, action) => {
           return {
             ...state,
             todos : state.todos.map(todo => 
-              todo.id === action.payload ? {
+              todo.id === action.payload.id ? {
                 ...todo,
+                text : action.payload.text,
                 editing : !todo.editing
               }
               : todo
               )
           };
       
-        case UPDATE:
-          return {
-            ...state,
-            todos : state.todos.map(todo => 
-              todo.id === action.payload.id ? {
-                ...todo,
-                text : action.payload.text
-              }
-              : todo          
-            )
-          };
-
       default:
         return state;
   }

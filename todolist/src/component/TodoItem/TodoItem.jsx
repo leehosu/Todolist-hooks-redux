@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TodoItem.css';
 
 const TodoItem = ({ todo, onRemove, onUpdate, onToggle, onToggleUpdate }) => {
   const { id, text, done, editing } = todo;
+  const [todoText, setTodoText] = useState(text);
+
+  const onChange = e => {
+    setTodoText(e.target.value)
+  }
+
   if (editing) {
     return (
       <li className="todo-item">
-        <input value={text} onChange={onUpdate} className="todo-item-text"/>
-        <button className="todo-update" onClick={() => onToggleUpdate(id)}>
+        <input value={todoText} onChange={onChange} className="todo-item-text"/>
+        <button className="todo-update" onClick={() => onToggleUpdate(id,todoText)}>
           완료
         </button>
         <button className="todo-remove" onClick={() => onRemove(id)}>

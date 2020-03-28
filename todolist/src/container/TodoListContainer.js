@@ -6,8 +6,7 @@ import {
   INSERT,
   TOGGLE_CHECK,
   REMOVE,
-  TOGGLE_UPDATE,
-  UPDATE
+  TOGGLE_UPDATE
 } from '../store/modules/todo';
 
 let id = 0;
@@ -50,26 +49,15 @@ const TodoListContainer = () => {
     dispatch({type : REMOVE, payload : id});
   };
 
-  const onToggleUpdate = id => {
+  const onToggleUpdate = (id,text) => {
     dispatch({
       type: TOGGLE_UPDATE,
-      payload: id
-    });
+      payload: {
+        id : id,
+        text : text
+    }});
   };
 
-  const onUpdate = useCallback(
-    e => {
-      dispatch({
-        type : UPDATE,
-        payload : {
-          text :e.target.value,
-          id : id
-        }
-      });
-    },[dispatch]
-  );
-
-  console.log({todos});
   return (
     <TodoList 
     input={input}
@@ -78,7 +66,6 @@ const TodoListContainer = () => {
     onChange={onChange}
     onToggle={onToggle}
     onRemove={onRemove}
-    onUpdate = { onUpdate }
     onToggleUpdate = { onToggleUpdate}
     />
   )

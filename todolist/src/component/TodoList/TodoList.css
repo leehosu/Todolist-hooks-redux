@@ -1,7 +1,7 @@
 .todo {
   width: 500px;
   height: 500px;
-  padding: 100px 650px;
+  margin : 100px auto;
 }
 
 .todo-input {

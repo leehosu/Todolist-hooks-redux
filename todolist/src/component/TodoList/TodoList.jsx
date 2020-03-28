@@ -26,7 +26,6 @@ const TodoList = ({
         onRemove={onRemove} 
         onToggle={onToggle}
         onToggleUpdate={onToggleUpdate}
-        onUpdate={onUpdate} 
         onChange={onChange}/>
       </ul>
     </div>
