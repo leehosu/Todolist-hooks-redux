@@ -1,7 +1,12 @@
 .todo {
   width: 500px;
   height: 500px;
-  margin : 100px auto;
+  margin: 100px auto;
+}
+
+.title {
+  font-size: 50px;
+  padding: 20px 0px;
 }
 
 .todo-input {
@@ -23,8 +28,10 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .todo-list {
   list-style: none;
+  padding: 0;
 }

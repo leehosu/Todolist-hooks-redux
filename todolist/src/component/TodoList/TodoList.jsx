@@ -14,6 +14,9 @@ const TodoList = ({
 }) => {
   return (
     <div className="todo">
+      <div className="title">
+        ToDo.
+    </div>
       <form onSubmit={onSubmit}>
         <input value={input} onChange={onChange} className="todo-input" />
         <button type="submit" className="todo-button">
