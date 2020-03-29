@@ -4,7 +4,7 @@
 
 ## Component Structure
 
-```js
+```
 ├─component
 │     ├─TodoInfo
 │     │     ├─TodoInfo.jsx

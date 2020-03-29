@@ -1,5 +1,14 @@
 # Build Redux
 
+## Directory Structure
+
+```
+├─store
+│     ├─modules
+│     │     ├─todo.js
+│     │     └─index.js
+```
+
 ## Store
 
 ##### modules/todo.js
