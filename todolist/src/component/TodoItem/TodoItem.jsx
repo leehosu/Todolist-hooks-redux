@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TodoItem.css';
 
-const TodoItem = ({ todo, onRemove, onUpdate, onToggle, onToggleUpdate }) => {
+const TodoItem = ({ todo, onRemove, onToggle, onToggleUpdate }) => {
   const { id, text, done, editing } = todo;
   const [todoText, setTodoText] = useState(text);
 

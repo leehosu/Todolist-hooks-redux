@@ -10,7 +10,6 @@ const TodoList = ({
   onChange,
   onSubmit,
   onToggleUpdate,
-  onUpdate
 }) => {
   return (
     <div className="todo">
