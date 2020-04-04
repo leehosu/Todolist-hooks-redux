@@ -10,12 +10,12 @@ const TodoList = ({
   onChange,
   onSubmit,
   onToggleUpdate,
+  moveItem
 }) => {
+  
   return (
     <div className="todo">
-      <div className="title">
-        ToDo.
-    </div>
+      <div className="title">ToDo.</div>
       <form onSubmit={onSubmit}>
         <input value={input} onChange={onChange} className="todo-input" />
         <button type="submit" className="todo-button">
@@ -23,12 +23,14 @@ const TodoList = ({
         </button>
       </form>
       <ul className="todo-list">
-        <TodoInfo 
-        todos={todos} 
-        onRemove={onRemove} 
-        onToggle={onToggle}
-        onToggleUpdate={onToggleUpdate}
-        onChange={onChange}/>
+        <TodoInfo
+          todos={todos}
+          onRemove={onRemove}
+          onToggle={onToggle}
+          onToggleUpdate={onToggleUpdate}
+          onChange={onChange}
+          moveItem={moveItem}
+        />
       </ul>
     </div>
   );

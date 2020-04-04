@@ -3,10 +3,20 @@ export const INSERT = "todo/INSERT";
 export const TOGGLE_CHECK = "todo/TOGGLE_CHECK";
 export const REMOVE = "todo/REMOVE";
 export const TOGGLE_UPDATE = "todo/TOGGLE_UPDATE";
+export const UPDATE = "todo/UPDATE";
 
 const initState = {
   input : "",
-  todos : []
+  todos : [
+    {
+      id : 0,
+      text : "영화 보기"
+    },
+    {
+      id : 1,
+      text : "책 읽기"
+    }
+  ]
 };
 
 const todos = (state = initState, action) => {
@@ -57,6 +67,12 @@ const todos = (state = initState, action) => {
               )
           };
       
+      case UPDATE:
+        return {
+          ...state,
+          todos : action.payload
+        }
+
       default:
         return state;
   }

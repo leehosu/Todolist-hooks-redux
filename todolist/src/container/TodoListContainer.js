@@ -1,23 +1,31 @@
-import React, {useCallback} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {useCallback, useState, useEffect} from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import update from "immutability-helper";
 import TodoList from '../component/TodoList';
 import {
   CHANGE_INPUT,
   INSERT,
   TOGGLE_CHECK,
   REMOVE,
-  TOGGLE_UPDATE
+  TOGGLE_UPDATE,
+  UPDATE
 } from '../store/modules/todo';
 
-let id = 0;
+let id = 1;
 
 const TodoListContainer = () => {
   const {
     input, todos
   } = useSelector(state => state.todos, []);
+  const [items, setItems] = useState([]);
+
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setItems(todos);
+  }, [todos]);
+  
   const onChange = useCallback(
     e => {
       dispatch({
@@ -58,6 +66,24 @@ const TodoListContainer = () => {
     }});
   };
 
+  const moveItem = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragItem = items[dragIndex];
+      setItems(
+          update(items, {
+            $splice: [
+              [dragIndex, 1],
+              [hoverIndex, 0, dragItem]
+            ]
+          })
+      )
+     dispatch({
+       type: UPDATE,
+       payload: items
+     })
+    },[dispatch,items]
+  );
+
   return (
     <TodoList 
     input={input}
@@ -66,7 +92,8 @@ const TodoListContainer = () => {
     onChange={onChange}
     onToggle={onToggle}
     onRemove={onRemove}
-    onToggleUpdate = { onToggleUpdate}
+    onToggleUpdate = {onToggleUpdate}
+    moveItem={moveItem}
     />
   )
 };
