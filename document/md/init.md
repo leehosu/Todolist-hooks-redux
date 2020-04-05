@@ -2,7 +2,7 @@
 
 ## Directory structure
 
-```js
+```
 ├─todolist
 │    │  ├─package.json
 │    │  └─README.md
