@@ -8,10 +8,10 @@ import {
   TOGGLE_CHECK,
   REMOVE,
   TOGGLE_UPDATE,
-  UPDATE
+  RENDER,
 } from '../store/modules/todo';
 
-let id = 1;
+let id = 0;
 
 const TodoListContainer = () => {
   const {
@@ -19,13 +19,12 @@ const TodoListContainer = () => {
   } = useSelector(state => state.todos, []);
   const [items, setItems] = useState([]);
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     setItems(todos);
-  }, [todos]);
-  
+  },[todos]);
+
   const onChange = useCallback(
     e => {
       dispatch({
@@ -39,6 +38,12 @@ const TodoListContainer = () => {
     e => {
       e.preventDefault();
       dispatch({
+        type: RENDER,
+        payload: {
+          items: items
+        }
+      });
+      dispatch({
         type : INSERT,
         payload : {
           id : ++id,
@@ -46,12 +51,18 @@ const TodoListContainer = () => {
         }
       });
       dispatch({type : CHANGE_INPUT, payload:""});
-    },[input, dispatch]
+    },[input, dispatch, items]
   );
 
   const onToggle = id => {
-    dispatch({type : TOGGLE_CHECK, payload:id});
-  };
+    dispatch({
+      type: RENDER,
+      payload: {
+        items: items
+      }
+    });
+      dispatch({ type: TOGGLE_CHECK, payload: id });
+    };
 
   const onRemove = id => {
     dispatch({type : REMOVE, payload : id});
@@ -59,35 +70,35 @@ const TodoListContainer = () => {
 
   const onToggleUpdate = (id,text) => {
     dispatch({
+      type: RENDER,
+      payload: {
+        items: items
+      }
+    });
+    dispatch({
       type: TOGGLE_UPDATE,
       payload: {
-        id : id,
-        text : text
-    }});
+        id: id,
+        text: text
+      }
+    });
   };
 
-  const moveItem = useCallback(
-    (dragIndex, hoverIndex) => {
-      const dragItem = items[dragIndex];
-      setItems(
-          update(items, {
-            $splice: [
-              [dragIndex, 1],
-              [hoverIndex, 0, dragItem]
-            ]
-          })
-      )
-     dispatch({
-       type: UPDATE,
-       payload: items
-     })
-    },[dispatch,items]
-  );
-
+  const moveItem = (dragIndex, hoverIndex) => {
+    const dragItem = items[dragIndex];
+    setItems(
+      update(items, {
+        $splice : [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragItem]
+        ]
+      })
+    );
+  }
   return (
     <TodoList 
     input={input}
-    todos={todos}
+    todos={items}
     onSubmit={onSubmit}
     onChange={onChange}
     onToggle={onToggle}
