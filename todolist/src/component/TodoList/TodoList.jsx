@@ -1,7 +1,6 @@
 import React from 'react';
-import TodoInfo from '../TodoInfo';
 import './TodoList.css';
-
+import TodoInfo from '../TodoInfo/TodoInfo';
 const TodoList = ({
   todos,
   input,
@@ -12,6 +11,7 @@ const TodoList = ({
   onToggleUpdate,
   moveItem
 }) => {
+
   return (
     <div className="todo">
       <div className="title">ToDo.</div>
@@ -22,13 +22,13 @@ const TodoList = ({
         </button>
       </form>
       <ul className="todo-list">
-        <TodoInfo
-          todos={todos}
-          onRemove={onRemove}
-          onToggle={onToggle}
-          onToggleUpdate={onToggleUpdate}
-          onChange={onChange}
-          moveItem={moveItem}
+        <TodoInfo 
+          todos = {todos}
+          onChange = {onChange}
+          onToggle = {onToggle}
+          onRemove = {onRemove}
+          onToggleUpdate = {onToggleUpdate}
+          moveItem = {moveItem}
         />
       </ul>
     </div>
