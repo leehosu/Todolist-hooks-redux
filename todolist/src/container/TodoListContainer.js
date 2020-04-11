@@ -17,6 +17,7 @@ const TodoListContainer = () => {
   const {
     input, todos
   } = useSelector(state => state.todos, []);
+  
   const [items, setItems] = useState([]);
 
   const dispatch = useDispatch();
@@ -51,8 +52,33 @@ const TodoListContainer = () => {
         }
       });
       dispatch({type : CHANGE_INPUT, payload:""});
-    },[input, dispatch, items]
+    }, [input, dispatch, items]
   );
+
+  const onKeyEnter = useCallback(
+    e => {
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        dispatch({
+          type: RENDER,
+          payload: {
+            items: items
+          }
+        });
+        dispatch({
+          type: INSERT,
+          payload: {
+            id: ++id,
+            text: input
+          }
+        });
+        dispatch({
+          type: CHANGE_INPUT,
+          payload: ""
+        });
+      }
+    }, [input, dispatch, items]
+  )
 
   const onToggle = id => {
     dispatch({
@@ -94,11 +120,12 @@ const TodoListContainer = () => {
         ]
       })
     );
-  }
+  };
   return (
     <TodoList 
     input={input}
     todos={items}
+    onKeyEnter={onKeyEnter}
     onSubmit={onSubmit}
     onChange={onChange}
     onToggle={onToggle}

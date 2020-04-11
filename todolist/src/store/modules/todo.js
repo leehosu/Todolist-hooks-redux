@@ -10,6 +10,7 @@ const initState = {
   todos : []
 };
 
+
 const todos = (state = initState, action) => {
   switch(action.type){
     case CHANGE_INPUT:
