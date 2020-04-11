@@ -14,6 +14,7 @@ const TodoList = ({
   onToggleUpdate,
   moveItem
 }) => {
+
   return (
     <div className="todo">
       <div className="title">ToDo.</div>

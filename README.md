@@ -10,8 +10,9 @@
 
 - **React.JS**
 - **Redux.JS**
+- **Redux - Thunk**
 - **Hooks**
-
+- **React Drag and Drop**
 ## 📗 Document
 
 #### [Initial setup](https://github.com/leehosu/Todolist-hooks-redux/blob/master/document/md/init.md)
